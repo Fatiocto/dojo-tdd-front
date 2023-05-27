@@ -11,6 +11,34 @@ export const CustomSelect = ({ value, onSelect }) => {
     return selectedValue === value;
   }, [selectedValue]);
 
+  const optionList = [
+    {
+      value: "fr",
+      label: "Français"
+    },
+    {
+      value: "ja",
+      label: "Japonais"
+    },
+    {
+      value: "ch",
+      label: "Chinois"
+    },
+    {
+      value: "it",
+      label: "Italien"
+    },
+    {
+      value: "co",
+      label: "Coréen"
+    },
+    {
+      value: "an",
+      label: "Anglais"
+    }
+
+
+];
 
   return(
     <div className="selectWrapper">
@@ -28,74 +56,24 @@ export const CustomSelect = ({ value, onSelect }) => {
         <input hidden value={selectedValue} className="input" id="restaurant-select" onChange={() => ({})}/>
         </button>
       </div>
+
+
       {isOptionListOpen && (
         <ul className="options">
-          <li className="option">
+          {optionList.map((option) =>
+          (<li className="option">
             <Radio
-              label="Français"
-              value="fr"
-              checked={isCurrentItemSelected("fr")}
+              label={option.label}
+              value={option.value}
+              checked={isCurrentItemSelected(option.value)}
               onChange={() => {
                 setIsOptionListOpen(false);
-                setSelectedValue("fr");
-                onSelect("Français");
+                setSelectedValue(option.value);
+                onSelect(option.label);
               }}/>
-          </li>
-          <li className="option">
-            <Radio
-              label="Indien"
-              value="indi"
-              checked={isCurrentItemSelected("indi")}
-              onChange={() => {
-                setIsOptionListOpen(false);
-                setSelectedValue("indi");
-                onSelect("Indien");
-              }}/>
-          </li>
-          <li className="option">
-            <Radio
-              label="Japonais"
-              value="jap"
-              checked={isCurrentItemSelected("jap")}
-              onChange={() => {
-                setIsOptionListOpen(false);
-                setSelectedValue("jap");
-                onSelect("Japonais");
-              }}/>
-          </li>
-          <li className="option">
-            <Radio
-              label="Chinois"
-              value="ch"
-              checked={isCurrentItemSelected("ch")}
-              onChange={() => {
-                setIsOptionListOpen(false);
-                setSelectedValue("ch");
-                onSelect("Chinois");
-              }}/>
-          </li>
-          <li className="option">
-            <Radio
-              label="Italien"
-              value="ita"
-              checked={isCurrentItemSelected("ita")}
-              onChange={() => {
-                setIsOptionListOpen(false);
-                setSelectedValue("ita");
-                onSelect("Italien");
-              }}/>
-          </li>
-          <li className="option">
-            <Radio
-              label="Coréen"
-              value="cor"
-              checked={isCurrentItemSelected("cor")}
-              onChange={() => {
-                setIsOptionListOpen(false);
-                setSelectedValue("cor");
-                onSelect("Coréen");
-              }}/>
-          </li>
+          </li>)
+        )}
+
       </ul>)}
     </div>
   )
